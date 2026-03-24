@@ -20,3 +20,21 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+from cafeteria_app.views import product_list
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('products/', product_list, name='product_list'),
+]
+from django.urls import path
+from cafeteria_app import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
+    path('students/', views.student_list, name='student_list'),
+    path('students/add/', views.student_add, name='student_add'),
+    path('students/<int:pk>/edit/', views.student_edit, name='student_edit'),
+    path('students/<int:pk>/delete/', views.student_delete, name='student_delete'),
+    # Ajoutez pour products et transactions
+]
