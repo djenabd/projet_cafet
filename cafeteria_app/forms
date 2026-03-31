@@ -3,5 +3,5 @@ from .models import Student
 
 class StudentForm(forms.ModelForm):
     class Meta:
-        mofields = ['name', 'email', 'credit']
-
+        model = Student
+        fields = '__all__'  # ou liste précise ['name', 'age', ...]
