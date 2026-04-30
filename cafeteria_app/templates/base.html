@@ -47,6 +47,7 @@
             <div class="navbar-nav">
                 <a class="nav-link" href="{% url 'home' %}">Accueil</a>
                 <a class="nav-link" href="{% url 'students' %}">Étudiants</a>
+                <a class="nav-link" href="{% url 'products' %}">Produits</a>
 
                 {% if user.is_authenticated %}
                     <span class="nav-link" style="color: pink;">Bonjour {{ user.username }} !</span>

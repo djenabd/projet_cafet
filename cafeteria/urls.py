@@ -6,7 +6,7 @@ from cafeteria_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-    path('products/', views.product_list, name='product_list'),
+    path('products/', views.product_list, name='products'),
     path('students/', views.student_list, name='students'),
     path('students/add/', views.student_add, name='student_add'),
     path('students/<int:pk>/edit/', views.student_edit, name='student_edit'),

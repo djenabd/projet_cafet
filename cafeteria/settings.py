@@ -11,6 +11,10 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+CAS_SERVER_URL = 'https://identites.ensea.fr/cas/' # URL du serveur CAS de l'école
+CAS_LOGIN_URL_NAME = 'cas_ng_login'
+CAS_LOGOUT_URL_NAME = 'cas_ng_logout'
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -20,6 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cafeteria_app',
+    'django_cas_ng',
 ]
 
 MIDDLEWARE = [

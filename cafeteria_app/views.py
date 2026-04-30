@@ -9,9 +9,7 @@ def home(request):
     return render (request, 'base.html')
 
 def student_list(request): 
-
-    
-    return render (request, 'product_list.html')
+    return render (request, 'student_form.html')
 
 def student_add(request): 
     return render (request, 'student_form.html')
