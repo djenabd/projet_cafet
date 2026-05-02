@@ -50,7 +50,7 @@
             <a class="navbar-brand" href="#">Cafet Panini</a>
             <div class="navbar-nav">
                 <a class="nav-link" href="{% url 'home' %}">Accueil</a>
-                <a class="nav-link active" href="{% url 'students' %}">Étudiants</a>
+                <a class="nav-link active" href="{% url 'students' %}">Mon Espace</a>
                 <a class="nav-link" href="{% url 'products' %}">Produits</a>
                 
                 {% if user.is_authenticated %}
@@ -65,7 +65,7 @@
 
     <!-- carré principal -->
     <div class="mon-bloc-blanc shadow-sm">
-        <h1>Mon Espace Étudiant</h1>
+        <h1>Mon Espace</h1>
         <p>Cochez vos produits préférés pour calculer le prix total de votre menu idéal.</p>
         <hr>
 
@@ -81,7 +81,7 @@
                 {% for product in products %}
                 <tr>
                     <td>
-                        <!-- Case à cocher avec le prix en attribut -->
+                        <!-- Case à cocher avec prix -->
                         <input type="checkbox" 
                                class="form-check-input product-check" 
                                data-price="{{ product.price }}" 
@@ -109,7 +109,7 @@
         <img src="https://i.postimg.cc/zGvbZwdw/logo-ensea.png" width="40">
     </div>
 
-    <!-- calcul javascript -->
+    <!-- calcul à revoir -->
     <script>
         function calculerTotal() {
             let total = 0;
