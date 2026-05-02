@@ -49,13 +49,13 @@
 
     <!-- carré principal -->
     <div class="mon-bloc-blanc shadow-sm">
-        <h1>🎓 Espace Étudiant</h1>
+        <h1> Espace Étudiant</h1>
         <p>Veuillez remplir vos informations ci-dessous.</p>
         <hr>
 
         <!-- connexion -->
         <form method="POST" style="max-width: 400px; margin: 0 auto; text-align: left;">
-            {% csrf_token %} <!-- Sécurité Django obligatoire -->
+            {% csrf_token %} 
             
             <label>Votre Nom :</label>
             <input type="text" name="nom" placeholder="Ex: Jean Dupont">

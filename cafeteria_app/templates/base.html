@@ -51,9 +51,9 @@
 
                 {% if user.is_authenticated %}
                     <span class="nav-link" style="color: pink;">Bonjour {{ user.username }} !</span>
-                    <a class="nav-link" href="{% url 'logout' %}">Déconnexion</a>
+                    <a class="nav-link" href="{% url 'cas_ng_logout' %}">Déconnexion</a>
                 {% else %}
-                    <a class="nav-link" href="{% url 'login' %}">Connexion</a>
+                    <a class="nav-link" href="{% url 'cas_ng_login' %}">Connexion</a>
                 {% endif %}
             </div>
         </div>
@@ -70,7 +70,7 @@
         <br><br>
 
         <h2>Voilà l'application Cafet Panini!!!!!</h2>
-        <p>Vous pouvez voir votre crédit ainsi que les menus disponibles à la cafet.</p>
+        <p>Vous pouvez voir votre compte ainsi que les menus disponibles à la cafet.</p>
         <p><b>Plus besoin de faire la queue pour un produit qui n'est plus disponible !</p>
     </div>
 
