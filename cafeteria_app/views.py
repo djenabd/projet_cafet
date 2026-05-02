@@ -9,7 +9,8 @@ def home(request):
     return render (request, 'base.html')
 
 def student_list(request): 
-    return render (request, 'student_form.html')
+    products = Product.objects.all()
+    return render(request, 'student_form.html', {'products': products})
 
 def student_add(request): 
     return render (request, 'student_form.html')

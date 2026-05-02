@@ -2,33 +2,47 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8" />
-    <title>Espace Étudiants - Cafet Panini</title>
+    <title>Mon Espace - Cafet Panini</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <style>
     
+    <style>
         body { background-color: #eeeeee; font-family: Arial, sans-serif; }
         .mon-bloc-blanc {
             background-color: white;
-            width: 70%;
+            width: 85%;            
             margin: 40px auto;
             padding: 30px;
             border: 2px solid #dddddd;
             border-radius: 10px;
             text-align: center;
         }
-        .mon-footer { background-color: #333333; color: white; padding: 15px; margin-top: 50px; }
-        
-        
-        input {
-            margin-bottom: 15px;
-            padding: 10px;
+        .table-stylee {
+            margin-top: 20px;
+            border-collapse: collapse;
             width: 100%;
-            border-radius: 5px;
-            border: 1px solid #ccc;
+        }
+        .table-stylee th, .table-stylee td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        .total-section {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+        }
+        .mon-footer {
+            background-color: #333333;
+            color: white;
+            padding: 15px;
+            margin-top: 50px;
         }
     </style>
 </head>
 <body>
+
+    {% load static %}
 
     <!-- Barre en haut -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -36,12 +50,14 @@
             <a class="navbar-brand" href="#">Cafet Panini</a>
             <div class="navbar-nav">
                 <a class="nav-link" href="{% url 'home' %}">Accueil</a>
-                <a class="nav-link" href="{% url 'students' %}">Étudiants</a>
+                <a class="nav-link active" href="{% url 'students' %}">Étudiants</a>
                 <a class="nav-link" href="{% url 'products' %}">Produits</a>
                 
                 {% if user.is_authenticated %}
                     <span class="nav-link" style="color: pink;">Bonjour {{ user.username }} !</span>
-                    <a class="nav-link" href="{% url 'logout' %}">Déconnexion</a>
+                    <a class="nav-link" href="{% url 'cas_ng_logout' %}">Déconnexion</a>
+                {% else %}
+                    <a class="nav-link" href="{% url 'cas_ng_login' %}">Connexion</a>
                 {% endif %}
             </div>
         </div>
@@ -49,22 +65,43 @@
 
     <!-- carré principal -->
     <div class="mon-bloc-blanc shadow-sm">
-        <h1> Espace Étudiant</h1>
-        <p>Veuillez remplir vos informations ci-dessous.</p>
+        <h1>Mon Espace Étudiant</h1>
+        <p>Cochez vos produits préférés pour calculer le prix total de votre menu idéal.</p>
         <hr>
 
-        <!-- connexion -->
-        <form method="POST" style="max-width: 400px; margin: 0 auto; text-align: left;">
-            {% csrf_token %} 
-            
-            <label>Votre Nom :</label>
-            <input type="text" name="nom" placeholder="Ex: Jean Dupont">
+        <table class="table-stylee">
+            <thead>
+                <tr>
+                    <th>Sélection</th>
+                    <th>Nom du Produit</th>
+                    <th>Prix</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>
+                        <!-- Case à cocher avec le prix en attribut -->
+                        <input type="checkbox" 
+                               class="form-check-input product-check" 
+                               data-price="{{ product.price }}" 
+                               onchange="calculerTotal()">
+                    </td>
+                    <td><b>{{ product.name }}</b></td>
+                    <td style="color: green; font-weight: bold;">{{ product.price }} €</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">Désolé, aucun produit n'est disponible pour le moment.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-            <label>Numéro d'étudiant :</label>
-            <input type="number" name="id_student" placeholder="Ex: 2026001">
-
-            <button type="submit" class="btn btn-primary w-100">Enregistrer</button>
-        </form>
+        <!-- Affichage du Total -->
+        <div class="total-section">
+            <h3>Total estimé : <span id="total-affichage" style="color: rgb(246, 130, 149);">0.00 €</span></h3>
+        </div>
     </div>
 
     <!-- Pied de page -->
@@ -72,6 +109,24 @@
         <p>© 2026 Cafétéria ENSEA</p>
         <img src="https://i.postimg.cc/zGvbZwdw/logo-ensea.png" width="40">
     </div>
+
+    <!-- Script de calcul -->
+    <script>
+        function calculerTotal() {
+            let total = 0;
+            // On sélectionne toutes les cases qui sont cochées
+            let checkboxes = document.querySelectorAll('.product-check:checked');
+            
+            checkboxes.forEach(function(box) {
+                // On récupère le prix et on remplace la virgule par un point si nécessaire
+                let prixTxt = box.getAttribute('data-price').replace(',', '.');
+                total += parseFloat(prixTxt);
+            });
+
+            // Mise à jour du texte avec 2 décimales
+            document.getElementById('total-affichage').innerText = total.toFixed(2) + " €";
+        }
+    </script>
 
 </body>
 </html>
