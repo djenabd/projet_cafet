@@ -98,7 +98,6 @@
             </tbody>
         </table>
 
-        <!-- Affichage du Total -->
         <div class="total-section">
             <h3>Total estimé : <span id="total-affichage" style="color: rgb(246, 130, 149);">0.00 €</span></h3>
         </div>
@@ -110,20 +109,18 @@
         <img src="https://i.postimg.cc/zGvbZwdw/logo-ensea.png" width="40">
     </div>
 
-    <!-- Script de calcul -->
+    <!-- calcul javascript -->
     <script>
         function calculerTotal() {
             let total = 0;
-            // On sélectionne toutes les cases qui sont cochées
             let checkboxes = document.querySelectorAll('.product-check:checked');
             
             checkboxes.forEach(function(box) {
-                // On récupère le prix et on remplace la virgule par un point si nécessaire
                 let prixTxt = box.getAttribute('data-price').replace(',', '.');
                 total += parseFloat(prixTxt);
             });
 
-            // Mise à jour du texte avec 2 décimales
+            
             document.getElementById('total-affichage').innerText = total.toFixed(2) + " €";
         }
     </script>
