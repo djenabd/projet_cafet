@@ -88,5 +88,13 @@ Pour pouvoir gerer les appareils internes plus facilement, pour une raison e sec
 Il se peut que le DNS de l'école ne réponde pas la même adresse que le DNS accessible depuis internet, pourquoi ? Quel serait l'avantage d'une différence d'adresse ?
 C'est assez frequent, ca sappelle le split dns, l'avantage est que en interne la connexion est directe ce qui la rend plus rapide que si elle devait passer par internet
 
-Exercice 2
 
+
+Exercice 2
+Questions d'approfondissement :
+
+Quelle est la différence entre /etc/hosts et un serveur DNS pour la résolution locale ?
+La difference est que /etc/hosts est pas centralisé donc chaque appareil doit etre configure a la main alors que DNS est une solution reseau automatique.
+
+Comment Django devrait-il être configuré pour accepter les requêtes de cafeteria.ensea ?
+Il faut ajouter la variable "ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'cafeteria.local', 'cafeteria.ensea']" dans settings.py parce que sinon la requete sera bloquée
