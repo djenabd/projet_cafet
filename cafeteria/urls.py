@@ -1,8 +1,12 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from cafeteria_app import views
 from django_cas_ng import views as cas_views
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register(r'students', views.StudentViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -14,6 +18,7 @@ urlpatterns = [
     path('students/<int:pk>/delete/', views.student_delete, name='student_delete'),
     path('accounts/login/', cas_views.LoginView.as_view(), name='cas_ng_login'),
     path('accounts/logout/', cas_views.LogoutView.as_view(), name='cas_ng_logout'),
+    path('api/', include(router.urls)),
 ]
     # Ajoutez pour products et transactions
 
