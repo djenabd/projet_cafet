@@ -7,7 +7,7 @@ SECRET_KEY = 'django-insecure-em7lozjrn3)tm+^!7$b#mouxyiv#phvr@vg&6l#esyzaqi81c(
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'cafeteria.local', 'cafeteria.ensea']
 
 
 # Application definition
@@ -100,6 +100,7 @@ STATIC_URL = 'static/'
 LOGIN_REDIRECT_URL = 'home'
 
 CAS_REDIRECT_URL = 'home'
+
 
 #pas sur
 AUTHENTICATION_BACKENDS = (
